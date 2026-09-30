@@ -1,0 +1,515 @@
+================================================================================
+GUIA DE ESTUDIO: PROGRAMACION ORIENTADA A OBJETOS (POO) EN PYTHON
+================================================================================
+Curso: Programacion Orientada a Objetos
+Estado: Version Actualizada y Expandida por Semanas
+Formato: Texto Plano (.txt) con Ejercicios, Analogias y Desglose Paso a Paso
+--------------------------------------------------------------------------------
+
+================================================================================
+PARTE A: PALABRAS CLAVE DEL CODIGO (SINTAXIS Y KEYWORDS DE PYTHON) [ACTUALIZADO]
+================================================================================
+
+A.1 DEF (FUNCIONES) [ACTUALIZADO]
+- DEFINICION: Palabra clave para declarar funciones o bloques de codigo reutilizables.
+- ANALOGIA: Una receta de cocina guardada para usar cada vez que quieras preparar una comida.
+- EJEMPLO DE CODIGO:
+  def saludar(nombre):
+      return f"Hola, {nombre}"
+
+  print(saludar("Carlos"))
+
+A.2 CLASS (CLASES) [ACTUALIZADO]
+- DEFINICION: Palabra clave para definir una clase (molde o plantilla de objetos).
+- ANALOGIA: El plano de construccion de un edificio.
+- EJEMPLO DE CODIGO:
+  class Persona:
+      pass
+
+  persona1 = Persona()
+
+A.3 SELF (REFERENCIA A LA INSTANCIA) [NUEVO]
+- DEFINICION: Representa al objeto concreto actual dentro de los metodos de la clase.
+- ANALOGIA: El pronombre "mi" (mi nombre, mi edad, mi saldo).
+- EJEMPLO DE CODIGO:
+  class Estudiante:
+      def __init__(self, nombre):
+          self.nombre = nombre
+
+A.4 RETURN (RETORNO DE VALOR) [NUEVO]
+- DEFINICION: Devuelve el resultado de la ejecucion de una funcion o metodo al invocador.
+- ANALOGIA: Pedir un producto y que el mesero te entregue el pedido terminado.
+- EJEMPLO DE CODIGO:
+  def sumar(a, b):
+      return a + b
+
+A.5 SUPER() (INVOCACION A LA CLASE PADRE) [NUEVO]
+- DEFINICION: Permite llamar a metodos (especialmente `__init__`) de la clase padre desde la clase derivada.
+- ANALOGIA: Consultar el libro de conocimientos de tus padres antes de agregar tu propia idea.
+- EJEMPLO DE CODIGO:
+  class Auto(Vehiculo):
+      def __init__(self, marca, modelo):
+          super().__init__(marca)
+          self.modelo = modelo
+
+A.6 IMPORT / FROM ... IMPORT ... (IMPORTACION DE MODULOS) [NUEVO]
+- DEFINICION: Incorpora librerias o modulos externos o internos en el script (ej. `tkinter`).
+- ANALOGIA: Traer una caja de herramientas especializada al taller desde la ferreteria.
+- EJEMPLO DE CODIGO:
+  import tkinter as tk
+  from tkinter import messagebox
+
+A.7 TRY / EXCEPT (MANEJO DE EXCEPCIONES) [NUEVO]
+- DEFINICION: Estructura para capturar y manejar errores en tiempo de ejecucion sin romper el programa.
+- ANALOGIA: Una red de seguridad colocada debajo de un trapecista.
+- EJEMPLO DE CODIGO:
+  try:
+      edad = int("veinte")
+  except ValueError:
+      print("Debes ingresar un numero valido")
+
+A.8 IF / ELSE (CONTROL CONDICIONAL) [NUEVO]
+- DEFINICION: Evalua una condicion logica para tomar distintos caminos de ejecucion.
+- ANALOGIA: Un semaforo: si esta verde avanzas, si esta rojo te detienes.
+- EJEMPLO DE CODIGO:
+  if edad >= 18:
+      print("Mayor de edad")
+  else:
+      print("Menor de edad")
+
+A.9 PASS (INSTRUCCION NULA) [NUEVO]
+- DEFINICION: Marcador de posicion sintactico para indicar un bloque de codigo vacio temporalmente.
+- ANALOGIA: Dejar una hoja en blanco con una nota de "proximamente" mientras terminas de redactar.
+- EJEMPLO DE CODIGO:
+  class Estudiante:
+      pass
+
+A.10 FOR ... IN ... (BUCLE DE ITERACION) [NUEVO]
+- DEFINICION: Repite un bloque de codigo recorriendo cada elemento de una secuencia o lista.
+- ANALOGIA: Un inspector revisando uno por uno los productos en una cinta transportadora.
+- EJEMPLO DE CODIGO:
+  for emp in lista_empleados:
+      emp.mostrar_datos()
+
+
+================================================================================
+PARTE B: TEMAS ORGANIZADOS POR SEMANA [ACTUALIZADO]
+================================================================================
+
+--------------------------------------------------------------------------------
+SEMANA 1: FUNDAMENTOS DE POO Y PILARES INICIALES
+--------------------------------------------------------------------------------
+
+1.1 PROGRAMACION ESTRUCTURADA VS POO (`programacion_estructurada.py`) [ACTUALIZADO]
+- DEFINICION:
+  La programacion estructurada separa la logica (funciones) de los datos (variables). 
+  La POO los agrupa en objetos que combinan estado y comportamiento.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Estructurada: Tener ingredientes sueltos por la mesa y las herramientas en otra esquina. 
+  POO: Tener kits cerrados donde cada caja trae su ingrediente y la herramienta exacta para procesarlo.
+- PARA QUE SIRVE / CUANDO SE USA:
+  Se usa la POO para evitar variables globales desordenadas y gestionar proyectos de software grandes.
+- EXPLICACION DEL CODIGO PASO A PASO (`programacion_estructurada.py`):
+  1. `def mostrar_empleado(nombre, cargo, salario):` -> Funcion independiente que recibe variables sueltas y las imprime.
+  2. `def calcular_salario_anual(salario):` -> Multiplica el valor por 12 y retorna el resultado.
+  3. `def aumentar_salario(salario, porcentaje):` -> Retorna un nuevo salario sumando el porcentaje.
+  4. Bloque ejecutable: Se definen variables sueltas `nombre = "Carlos"`, `cargo = "Tecnico"`, `salario = 1800` y se pasan manualmente a cada funcion.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Convertir una funcion estructurada de calcular impuestos a una clase POO.
+    Solucion:
+    class Producto:
+        def __init__(self, precio):
+            self.precio = precio
+        def calcular_impuesto(self):
+            return self.precio * 0.18
+
+1.2 ABSTRACCION (`abstraccion.py`) [ACTUALIZADO]
+- DEFINICION:
+  Consiste en seleccionar unicamente los atributos y metodos esenciales de una entidad, ignorando los detalles irrelevantes para el problema actual.
+- ANALOGIA / EXPLICACION SIMPLE:
+  El panel de un automovil: solo muestra velocidad, combustible y temperatura, ocultando el mapa de circuitos electronicos del motor.
+- PARA QUE SIRVE / CUANDO SE USA:
+  Para simplificar modelos de datos complejos y reducir la carga cognitiva al programar.
+- EXPLICACION DEL CODIGO PASO A PASO (`abstraccion.py`):
+  1. `class Empleado:` -> Define la plantilla con atributos esenciales: `nombre`, `cargo` y `salario`.
+  2. `def __init__(self, nombre, cargo, salario):` -> Asigna los datos iniciales al objeto actual.
+  3. `def mostrar_datos(self):` -> Imprime la ficha del empleado accediendo a sus atributos internos.
+  4. `def aumentar_salario(self, porcentaje):` -> Modifica `self.salario` aplicando el porcentaje.
+  5. `empleado1 = Empleado("Carlos", "Tecnico de Sistemas", 1800)` -> Instancia el objeto abstracto.
+  6. `empleado1.aumentar_salario(10)` -> Aplica la logica sin preocuparse por la implementacion interna.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Modela una clase `Celular` usando abstraccion (atributos: marca, bateria; metodo: usar).
+    Solucion:
+    class Celular:
+        def __init__(self, marca, bateria):
+            self.marca = marca
+            self.bateria = bateria
+        def usar(self, horas):
+            self.bateria -= horas * 10
+
+1.3 ENCAPSULAMIENTO BASICO (`encapsulamiento.py`) [ACTUALIZADO]
+- DEFINICION:
+  Tecnica para ocultar el estado interno de un objeto (usando `__`) y ofrecer acceso controlado mediante metodos.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Un cajero automatico: no puedes tomar el dinero directamente de la caja fuerte; debes interactuar a traves de la pantalla y la clave.
+- PARA QUE SIRVE / CUANDO SE USA:
+  Para prevenir alteraciones accidentales o no autorizadas en los datos sensibles de un objeto.
+- EXPLICACION DEL CODIGO PASO A PASO (`encapsulamiento.py`):
+  1. `self.__salario = salario` -> El doble guion alto/bajo oculta el atributo fuera de la clase.
+  2. `def obtener_salario(self):` -> Getter que retorna el valor encapsulado de `self.__salario`.
+  3. `def aumentar_salario(self, porcentaje):` -> Setter que modifica el salario encapsulado con una formula.
+  4. `empleado = Empleado("Chantal", "Nutricionista", 2300)` -> Crea la instancia.
+  5. `empleado.obtener_salario()` -> Consulta el valor a traves del metodo publico.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear la clase `CajaFuerte` con atributo privado `__clave`.
+    Solucion:
+    class CajaFuerte:
+        def __init__(self, clave):
+            self.__clave = clave
+        def verificar(self, intento):
+            return self.__clave == intento
+
+1.4 HERENCIA BASICA (`herencia.py`) [ACTUALIZADO]
+- DEFINICION:
+  Mecanismo que permite a una clase hija adquirir los atributos y metodos de una clase padre o base.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Un arbol genealogico: el hijo hereda rasgos biologicos de los padres y ademas adquiere habilidades propias.
+- PARA QUE SIRVE / CUANDO SE USA:
+  Para evitar duplicar codigo entre clases que comparten una relacion jerarquica de tipo "ES UN".
+- EXPLICACION DEL CODIGO PASO A PASO (`herencia.py`):
+  1. `class Empleado:` -> Clase padre que define `nombre` y `salario`.
+  2. `class EmpleadoTecnico(Empleado):` -> Clase hija que deriva de `Empleado`.
+  3. `super().__init__(nombre, salario)` -> Llama al constructor padre para reutilizar su inicializacion.
+  4. `self.especialidad = especialidad` -> Agrega un atributo exclusivo de la clase derivada.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear clase `Vehiculo` y subclase `Moto` con atributo `cilindrada`.
+    Solucion:
+    class Vehiculo:
+        def __init__(self, marca): self.marca = marca
+    class Moto(Vehiculo):
+        def __init__(self, marca, cilindrada):
+            super().__init__(marca)
+            self.cilindrada = cilindrada
+
+1.5 POLIMORFISMO BASICO (`polimorfismo.py`) [ACTUALIZADO]
+- DEFINICION:
+  Capacidad de diferentes objetos de responder a la misma llamada de metodo ejecutando su propia implementacion.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Presionar el boton de reproduccion ("Play") en Spotify, YouTube o reproductor de DVD: cada aparato reproduce segun su formato.
+- PARA QUE SIRVE / CUANDO SE USA:
+  Permite procesar colecciones mixtas de objetos mediante una interfaz comun.
+- EXPLICACION DEL CODIGO PASO A PASO (`polimorfismo.py`):
+  1. `EmpleadoTecnico` y `Gerente` heredan de `Empleado` y cada uno sobrescribe `mostrar_datos()`.
+  2. `empleados = [EmpleadoTecnico(...), Gerente(...)]` -> Lista con objetos de distintos tipos.
+  3. `for empleado in empleados: empleado.mostrar_datos()` -> Invoca la version del metodo correspondiente a la clase real de cada objeto.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear `Circulo` y `Cuadrado` con el metodo polimorfico `dibujar()`.
+    Solucion:
+    class Circulo:
+        def dibujar(self): print("Dibujando Circulo")
+    class Cuadrado:
+        def dibujar(self): print("Dibujando Cuadrado")
+    lista = [Circulo(), Cuadrado()]
+    for item in lista: item.dibujar()
+
+
+--------------------------------------------------------------------------------
+SEMANA 2: ATRIBUTOS, METODOS Y MODIFICADORES DE ACCESO
+--------------------------------------------------------------------------------
+
+2.1 ATRIBUTOS DE INSTANCIA Y CONSTRUCTOR (`atributos.py`, `tres_atributos.py`) [ACTUALIZADO]
+- DEFINICION:
+  Los atributos son variables asignadas a cada objeto especifico. El metodo `__init__` se ejecuta al instanciar.
+- ANALOGIA / EXPLICACION SIMPLE:
+  La ficha de inscripcion de un alumno llenada al ingresar a la universidad.
+- PARA QUE SIRVE / CUANDO SE USA:
+  Para guardar y representar las caracteristicas particulares de cada objeto.
+- EXPLICACION DEL CODIGO PASO A PASO (`atributos.py`):
+  1. `def __init__(self, nombre, edad, carrera):` -> Define el constructor.
+  2. `self.nombre = nombre` -> Guarda cada parametro como un atributo del objeto.
+  3. `estudiante1 = Estudiante("ROMULO LEON", 65, "INGENIERIA AMBIENTAL")` -> Instanciacion.
+  4. `print(estudiante1.nombre)` -> Acceso mediante la sintaxis de punto.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear la clase `Libro` con atributos `titulo`, `autor` y `paginas`.
+    Solucion:
+    class Libro:
+        def __init__(self, titulo, autor, paginas):
+            self.titulo = titulo
+            self.autor = autor
+            self.paginas = paginas
+
+2.2 ATRIBUTO PUBLICO (`atributo_publico.py`) [NUEVO]
+- DEFINICION:
+  Atributo comun (sin guiones bajos) accesible y modificable libremente desde cualquier lugar del programa.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Un letrero en la puerta de una tienda que cualquiera puede leer o cambiar.
+- PARA QUE SIRVE / CUANDO SE USA:
+  Para datos simples que no requieren validaciones o restricciones de seguridad.
+- EXPLICACION DEL CODIGO PASO A PASO (`atributo_publico.py`):
+  1. `self.nombre = nombre` -> Declaracion publica.
+  2. `estudiante1.nombre = "Susana Chavez"` -> Se modifica directamente desde fuera de la clase.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear objeto `Mesa` con atributo publico `color` y cambiar su valor.
+    Solucion:
+    class Mesa:
+        def __init__(self, color): self.color = color
+    m = Mesa("Marron")
+    m.color = "Negro"
+
+2.3 ATRIBUTO PROTEGIDO (`atributo_protegido.py`) [NUEVO]
+- DEFINICION:
+  Atributo precedido por un guion bajo (`_`). Indica la convencion de que es de uso interno o para subclases.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Una puerta con cartel de "Solo Personal Autorizado": no tiene llave, pero indica respetar el uso restringido.
+- PARA QUE SIRVE / CUANDO SE USA:
+  Para comunicarle a otros programadores que el atributo no deberia modificarse directamente desde fuera.
+- EXPLICACION DEL CODIGO PASO A PASO (`atributo_protegido.py`):
+  1. `self._saldo = saldo` -> Convencion de atributo protegido.
+  2. `print(cuenta1._saldo)` -> Python permite leerlo, pero va en contra de la convencion de diseño.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear la clase `Vehiculo` con atributo protegido `_motor`.
+    Solucion:
+    class Vehiculo:
+        def __init__(self, motor): self._motor = motor
+
+2.4 ATRIBUTO PRIVADO Y NAME MANGLING (`atributo_privado.py`) [NUEVO]
+- DEFINICION:
+  Atributo con doble guion bajo (`__`). Python altera su nombre internamente a `_Clase__atributo` (Name Mangling).
+- ANALOGIA / EXPLICACION SIMPLE:
+  Una caja fuerte con combinacion secreta blindada.
+- PARA QUE SIRVE / CUANDO SE USA:
+  Para evitar colisiones de nombres en herencia y bloquear accesos accidentales directos.
+- EXPLICACION DEL CODIGO PASO A PASO (`atributo_privado.py`):
+  1. `self.__saldo = saldo` -> Atributo privado.
+  2. `cuenta1.mostrar_saldo()` -> Funciona correctamente porque se llama dentro de la clase.
+  3. `print(cuenta1.__saldo)` -> Provoca un error `AttributeError` porque el atributo fue renombrado por Python.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear la clase `Usuario` con clave privada `__password` y metodo `login`.
+    Solucion:
+    class Usuario:
+        def __init__(self, password): self.__password = password
+        def login(self, p): return self.__password == p
+
+2.5 NIVEL DE ACCESO Y MODIFICADORES (`modificadores_accesos.py`) [NUEVO]
+- DEFINICION:
+  Aclara que Python no posee modificadores estrictos (`public`, `private`, `protected`) sino convenciones sintacticas.
+- RESUMEN DE CONVENCIONES:
+  - Publico (`nombre`): Sin restricciones.
+  - Protegido (`_nombre`): Uso interno/subclase.
+  - Privado (`__nombre`): Name Mangling activo.
+
+2.6 METODOS DE INSTANCIA (`metodos.py`, `atributosconmetodos.py`) [ACTUALIZADO]
+- DEFINICION:
+  Funciones declaradas dentro de la clase que manipulan el estado del objeto mediante `self`.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Las acciones que puede realizar una persona (caminar, hablar, estudiar).
+- EXPLICACION DEL CODIGO PASO A PASO (`metodos.py`, `atributosconmetodos.py`):
+  1. `def estudiar(self):` -> Metodo de accion simple.
+  2. `def presentarse(self):` -> Metodo que lee `self.nombre` y `self.edad`.
+  3. `estudiante1.presentarse()` -> Llamada al metodo desde la instancia.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear clase `Perro` con metodo `ladrar()`.
+    Solucion:
+    class Perro:
+        def ladrar(self): print("¡Guau!")
+
+2.7 METODOS CON RETORNO (`metodos_con_valores.py`) [ACTUALIZADO]
+- DEFINICION:
+  Metodos que procesan argumentos y devuelven un valor utilizando la instruccion `return`.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Una calculadora a la que le das dos numeros y te devuelve la respuesta en pantalla.
+- EXPLICACION DEL CODIGO PASO A PASO (`metodos_con_valores.py`):
+  1. `def sumar(self, n1, n2):` -> Recibe dos parametros.
+  2. `return n1 + n2` -> Devuelve la suma.
+  3. `resultado = calculadora.sumar(26.25, 19)` -> Recibe y almacena el valor devuelto.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Metodo que calcule el promedio de 3 notas.
+    Solucion:
+    class Alumno:
+        def promedio(self, n1, n2, n3): return (n1 + n2 + n3) / 3
+
+2.8 MULTIPLES OBJETOS E INSTANCIACION (`MultiplesObjetos.py`) [NUEVO]
+- DEFINICION:
+  Creacion de varias instancias independientes derivadas de la misma clase.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Fabricar multiples vehiculos en una linea de ensamblaje usando la misma matriz.
+- EXPLICACION DEL CODIGO PASO A PASO (`MultiplesObjetos.py`):
+  1. `estudiante1 = Estudiante("Rabbit", 16, "IOT")`
+  2. `estudiante2 = Estudiante("Tigger", 19, "PYTHON")`
+  3. `estudiante3 = Estudiante("Oso", 26, "JAVA")`
+  4. Cada variable hace referencia a un objeto unico con sus propios datos en memoria.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Instanciar 2 objetos de la clase `Coche`.
+    Solucion:
+    class Coche:
+        def __init__(self, marca): self.marca = marca
+    c1 = Coche("Toyota")
+    c2 = Coche("Honda")
+
+
+--------------------------------------------------------------------------------
+SEMANA 3: HERENCIA AVANZADA, SOBREESCRITURA Y GUI CON TKINTER
+--------------------------------------------------------------------------------
+
+3.1 CLASE BASE Y CLASE DERIVADA (`ClaseBase_derivada.py`) [ACTUALIZADO]
+- DEFINICION:
+  La clase base (padre) contiene caracteristicas generales; la clase derivada (hija) se especifica colocando al padre entre parentesis.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Clase base: "Vehiculo". Clase derivada: "Bicicleta".
+- EXPLICACION DEL CODIGO PASO A PASO (`ClaseBase_derivada.py`):
+  1. `class Animal:` -> Clase base con metodo `comer()`.
+  2. `class Perro(Animal):` -> Clase derivada que hereda `comer()` y agrega `ladra()`.
+  3. `perro1 = Perro()` -> Puede ejecutar metodos heredados y propios.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear clase `Instrumento` y subclase `Guitarra`.
+    Solucion:
+    class Instrumento:
+        def tocar(self): print("Sonando...")
+    class Guitarra(Instrumento):
+        def afinar(self): print("Afinando cuerdas.")
+
+3.2 HERENCIA SIMPLE (`Herencia_Simple.py`) [ACTUALIZADO]
+- DEFINICION:
+  Jerarquia de herencia directa de una sola clase hija a partir de una sola clase padre.
+- EXPLICACION DEL CODIGO PASO A PASO (`Herencia_Simple.py`):
+  1. `class Vehiculo:` -> Define `arrancar()`.
+  2. `class Auto(Vehiculo):` -> Hereda de `Vehiculo` y añade `conducir()`.
+  3. `auto1 = Auto()` -> Instancia que ejecuta metodos de ambas clases.
+
+3.3 SOBREESCRITURA DE METODOS / OVERRIDING (`Sobrescritura.py`) [ACTUALIZADO]
+- DEFINICION:
+  Redefinicion completa de un metodo heredado en la clase hija para alterar su comportamiento.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Un reloj antiguo que hacia "Tik-Tak" reemplazado por un reloj digital que emite un pitido.
+- EXPLICACION DEL CODIGO PASO A PASO (`Sobrescritura.py`):
+  1. `class Animal:` -> Define `hacer_ruido()` basico.
+  2. `class Perro(Animal):` -> Sobrescribe `hacer_ruido()` para imprimir "¡Guau!".
+  3. `class Gato(Animal):` -> Sobrescribe `hacer_ruido()` para imprimir "¡Miau!".
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Sobrescribir `calcular_sueldo()` para un `Gerente`.
+    Solucion:
+    class Empleado:
+        def sueldo(self): return 1000
+    class Gerente(Empleado):
+        def sueldo(self): return 1000 + 500
+
+3.4 HERENCIA MULTIPLE (`Herencia_Multiple.py`) [ACTUALIZADO]
+- DEFINICION:
+  Caracteristica donde una clase hija deriva de dos o mas clases padres simultaneamente.
+- ANALOGIA / EXPLICACION SIMPLE:
+  Un pato que vuela (como ave voladora), nada (como pez) y camina.
+- EXPLICACION DEL CODIGO PASO A PASO (`Herencia_Multiple.py`):
+  1. `class Volador:` -> Define `Volar()`.
+  2. `class Nadador:` -> Define `Nadar()`.
+  3. `class Pato(Volador, Nadador):` -> Hereda de ambas clases.
+  4. `pato1.Volar()`, `pato1.Nadar()` -> Ejecuta metodos de ambos padres.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear clase `Smartwatch` que herede de `Reloj` y `Telefono`.
+    Solucion:
+    class Reloj:
+        def hora(self): print("12:00")
+    class Telefono:
+        def llamar(self): print("Llamando...")
+    class Smartwatch(Reloj, Telefono): pass
+
+3.5 SISTEMA INTEGRADOR DE EMPLEADOS (`Sistema_Empleados.py`) [NUEVO]
+- DEFINICION:
+  Proyecto integrador que combina POO (Herencia, Encapsulamiento, Getters/Setters), Manejo de Excepciones (`try`/`except`) e Interfaz Grafica (`tkinter`).
+- EXPLICACION DEL CODIGO PASO A PASO (`Sistema_Empleados.py`):
+  1. **Clase Base `Empleado`**:
+     - Atributos: Publicos (`nombre`, `cargo`, `salario`), Protegido (`_dni`), Privado (`__edad`).
+     - Metodos `get_edad()` y `set_edad(edad)`: Getter y Setter con validacion `if edad > 0:`.
+  2. **Herencia y Sobrescritura (`Administrativo`, `Tecnico`)**:
+     - Reutilizan el metodo padre mediante `super().mostrar_informacion()` y le concatenan datos propios (`area`, `especialidad`).
+  3. **Herencia Multiple (`AdministrativoTI`)**:
+     - Hereda de `Administrativo` y de `Acceso_Sistema` (`iniciar_session()`, `cerrar_session()`).
+  4. **Formulario Tkinter y Validaciones**:
+     - `if nombre == "" ...`: Valida campos vacios usando `messagebox.showwarning()`.
+     - `try: edad = int(edad)` / `except ValueError:`: Captura entradas numericas invalidas sin romper el sistema.
+
+3.6 INTERFAZ GRAFICA DE USUARIO CON TKINTER (`repaso_Tkinter.py`) [ACTUALIZADO]
+- DEFINICION:
+  Construccion de aplicaciones de escritorio interactivas mediante la libreria `tkinter`.
+- PASOS FUNDAMENTALES DE TKINTER:
+  1. Importar librerias: `import tkinter as tk` y `from tkinter import messagebox`.
+  2. Crear ventana principal: `ventana = tk.Tk()`, `title()`, `geometry()`.
+  3. Crear componentes (widgets): `tk.Label()`, `tk.Entry()`.
+  4. Organizar posicionamiento: `.pack()` o `.grid()`.
+  5. Crear funciones de eventos: `Guardar()` y `Limpiar()` con `entrada.delete(0, tk.END)`.
+  6. Asignar comandos a botones: `tk.Button(..., command=Guardar)`.
+  7. Iniciar bucle de eventos: `ventana.mainloop()`.
+- EXPLICACION DEL CODIGO PASO A PASO (`repaso_Tkinter.py`):
+  - `entrada_nombre.get()` extrae la cadena ingresada.
+  - `messagebox.showinfo("Registro", ...)` despliega un cuadro emergente.
+  - `entrada_nombre.delete(0, tk.END)` borra la entrada desde la primera posicion `0` hasta el final `tk.END`.
+- EJERCICIOS PRACTICOS CON SOLUCION:
+  * Ejercicio 1: Crear una ventana de login simple en Tkinter.
+    Solucion:
+    import tkinter as tk
+    from tkinter import messagebox
+    def validar():
+        if ent_pass.get() == "1234":
+            messagebox.showinfo("OK", "Bienvenido")
+        else:
+            messagebox.showerror("Error", "Clave incorrecta")
+    v = tk.Tk()
+    ent_pass = tk.Entry(v, show="*")
+    ent_pass.pack()
+    tk.Button(v, text="Entrar", command=validar).pack()
+    v.mainloop()
+
+
+================================================================================
+PARTE C: RESUMEN TIPO CHULETA (PUNTOS CLAVE PARA EL EXAMEN) [ACTUALIZADO]
+================================================================================
+* `def`: Define funciones reutilizables.
+* `class`: Declara moldes para instanciar objetos.
+* `self`: Referencia explicita al objeto actual dentro de la clase.
+* `__init__`: Constructor ejecutado al instanciar.
+* `return`: Devuelve un valor al invocador de la funcion.
+* `super()`: Invoca metodos del padre en clases derivadas.
+* `import`: Carga librerias externas o internas (`tkinter`).
+* `try / except`: Captura excepciones para evitar caidas del sistema.
+* Atributo Publico: `self.atributo` -> Libre acceso.
+* Atributo Protegido: `self._atributo` -> Convencion de uso interno/subclase.
+* Atributo Privado: `self.__atributo` -> Aplica Name Mangling (`_Clase__atributo`).
+* Getters/Setters: Metodos de lectura y modificacion validada de atributos privados.
+* Abstraccion: Muestra lo esencial y oculta la complejidad.
+* Encapsulamiento: Protege el estado interno del objeto.
+* Herencia Simple: `class Hija(Padre):` -> Reutilizacion jerarquica directa.
+* Herencia Multiple: `class Hija(Padre1, Padre2):` -> Combina capacidades.
+* Sobrescritura (Overriding): Redefine un metodo heredado en la clase hija.
+* Polimorfismo: Mismo nombre de metodo, diferente respuesta segun la clase del objeto.
+* Tkinter: `Tk()`, `Label`, `Entry` (`.get()`, `.delete()`), `Button` (`command=`), `messagebox`, `mainloop()`.
+
+
+================================================================================
+PARTE D: PREGUNTAS Y EJERCICIOS DE PRACTICA GLOBAL CON RESPUESTAS [ACTUALIZADO]
+================================================================================
+
+PREGUNTA 1:
+¿Cual es la diferencia en Python entre un atributo publico (`self.x`), uno protegido (`self._x`) y uno privado (`self.__x`)?
+RESPUESTA 1:
+- El publico se accede y modifica libremente sin restricciones.
+- El protegido es una convencion visual de indicacion de uso interno/heredado; Python no impide su acceso directo.
+- El privado sufre Name Mangling (se renombra como `_NombreClase__x`), generando un error `AttributeError` al intentar acceder directamente como `objeto.__x`.
+
+PREGUNTA 2:
+¿Para que se utiliza `super().__init__(...)` en una clase derivada?
+RESPUESTA 2:
+Para ejecutar el constructor de la clase base padre, asegurando que los atributos de la clase padre queden inicializados en la instancia hija sin duplicar codigo.
+
+PREGUNTA 3:
+¿Como se aplica el polimorfismo en una lista de objetos de distintas clases en Python?
+RESPUESTA 3:
+Invocando el mismo metodo en un bucle `for obj in lista: obj.metodo()`. Cada objeto ejecutara la version del metodo correspondiente a su clase.
+
+PREGUNTA 4:
+En Tkinter, ¿para que sirven los metodos `get()` y `delete(0, tk.END)` en un componente `Entry`?
+RESPUESTA 4:
+`get()` obtiene la cadena de texto escrita por el usuario, y `delete(0, tk.END)` borra la totalidad del texto presente en la caja de entrada.
+
+PREGUNTA 5:
+¿Que funcion cumple el bloque `try / except ValueError` en la validacion de formularios?
+RESPUESTA 5:
+Captura el error de conversion cuando un usuario ingresa texto en campos que requieren numeros (como edad o salario con `int()` o `float()`), evitando que el programa se detenga con un fallo fatal.
